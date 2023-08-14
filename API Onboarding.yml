@@ -1,0 +1,49 @@
+openapi: '3.0.2'
+info:
+  title: API Onboarding
+  version: '1.0'
+servers:
+  - url: https://STD22091.com
+paths:
+  /students:
+    get:
+      summary: Récupérer les informations des étudiants
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              example:
+                student_id: STD22091
+                name: Tsinjo Mickaella
+                age: 19
+        '500':
+          description: Erreur interne du serveur
+          content:
+            text/plain:
+              example: Une erreur est survenue
+    post:
+      summary: Ajouter un nouvel étudiant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                age:
+                  type: integer
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              example:
+                message: Étudiant ajouté avec succès
+        '500':
+          description: Erreur interne du serveur
+          content:
+            text/plain:
+              example: Une erreur est survenue
