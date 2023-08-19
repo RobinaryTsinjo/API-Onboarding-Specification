@@ -1,4 +1,4 @@
-openapi: '3.0.2'
+openapi: 3.0.2
 info:
   title: API Onboarding
   version: '1.0'
@@ -13,8 +13,8 @@ paths:
           description: Succès
           content:
             application/json:
-              schema: 
-                $ref:'#/components/schemas/Student'
+              schema:
+                $ref: '#/components/schemas/Student'
         '500':
           description: Erreur interne du serveur
           content:
@@ -27,7 +27,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref:'#/components/schemas/Student'
+              $ref: '#/components/schemas/Student'
       responses:
         '200':
           description: Succès
@@ -40,21 +40,15 @@ paths:
           content:
             text/plain:
               example: Une erreur est survenue
-      components:
-        schemas:
-          Student:
-          type: object
-          properties:
-            type: object
-            properties: 
-            id:
-             type: integer
-              format: int64
-              example : 1
-             name :
-             type: string
-              format: int64
-              example: Tsinjo
-                
-            
-              
+components:
+  schemas:
+    Student:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Tsinjo
