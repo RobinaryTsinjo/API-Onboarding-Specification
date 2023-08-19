@@ -8,6 +8,8 @@ paths:
   /students:
     get:
       summary: Récupérer les informations des étudiants
+      tags:
+        - Students
       responses:
         '200':
           description: Succès
@@ -22,6 +24,8 @@ paths:
               example: Une erreur est survenue
     post:
       summary: Ajouter un nouvel étudiant
+      tags:
+        - Students
       requestBody:
         required: true
         content:
@@ -40,6 +44,89 @@ paths:
           content:
             text/plain:
               example: Une erreur est survenue
+    put:
+      summary: Mettre à jour les informations d'un étudiant
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentInfo'
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '500':
+          description: Erreur interne du serveur
+          content:
+            text/plain:
+              example: Une erreur est survenue
+    delete:
+      summary: Supprimer un étudiant
+      tags:
+        - Students
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '500':
+          description: Erreur interne du serveur
+          content:
+            text/plain:
+              example: Une erreur est survenue
+
+  /teachers:
+    get:
+      summary: Récupérer les informations des enseignants et des cours
+      tags:
+        - Teachers
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              example:
+                - teacher_name: Tokimahery Ramarozaka
+                  courses:
+                    - course_name: Algorithmique
+                      course_code: prog1
+                      course_duration: 12 semaines
+        '500':
+          description: Erreur interne du serveur
+          content:
+            text/plain:
+              example: Une erreur est survenue
+    post:
+      summary: Ajouter un nouvel enseignant avec des cours
+      tags:
+        - Teachers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTeacher'
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '500':
+          description: Erreur interne du serveur
+          content:
+            text/plain:
+              example: Une erreur est survenue
+
 components:
   schemas:
     StudentInfo:
@@ -53,8 +140,8 @@ components:
           type: integer
       example:
         student_id: 123
-        name: Tsinjo
-        age: 19
+        name: John Doe
+        age: 20
 
     NewStudent:
       type: object
@@ -70,4 +157,34 @@ components:
         message:
           type: string
       example:
-        message: Étudiant ajouté avec succès
+        message: Opération réussie
+
+    NewTeacher:
+      type: object
+      properties:
+        teacher_name:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
+      example:
+        teacher_name: Tokimahery Ramarozaka
+        courses:
+          - course_name: Algorithmique
+            course_code: prog1
+            course_duration: 12 semaines
+
+    Course:
+      type: object
+      properties:
+        course_name:
+          type: string
+        course_code:
+          type: string
+        course_duration:
+          type: string
+      example:
+        course_name: Algorithmique
+        course_code: prog1
+        course_duration: 12 semaines
