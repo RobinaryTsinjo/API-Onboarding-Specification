@@ -13,10 +13,8 @@ paths:
           description: Succès
           content:
             application/json:
-              example:
-                student_id: STD22091
-                name: Tsinjo Mickaella
-                age: 19
+              schema: 
+                $ref:'#/components/schemas/Student'
         '500':
           description: Erreur interne du serveur
           content:
@@ -29,12 +27,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                age:
-                  type: integer
+              $ref:'#/components/schemas/Student'
       responses:
         '200':
           description: Succès
@@ -47,3 +40,21 @@ paths:
           content:
             text/plain:
               example: Une erreur est survenue
+      components:
+        schemas:
+          Student:
+          type: object
+          properties:
+            type: object
+            properties: 
+            id:
+             type: integer
+              format: int64
+              example : 1
+             name :
+             type: string
+              format: int64
+              example: Tsinjo
+                
+            
+              
