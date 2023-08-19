@@ -53,8 +53,8 @@ components:
           type: integer
       example:
         student_id: 123
-        name: John Doe
-        age: 20
+        name: Tsinjo
+        age: 19
 
     NewStudent:
       type: object
