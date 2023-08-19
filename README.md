@@ -19,13 +19,26 @@ les méthodes, les réponses et les requêtes pour interagir avec l'API.
   - Corps de la requête : Format JSON pour spécifier les détails de l'étudiant.
   - Réponse 200 : Confirme l'ajout de l'étudiant.
   - Réponse 500 : En cas d'erreur, renvoie un message d'erreur.
+    
+- **PUT** : Met à jour les informations d'un étudiant.
+  
+- **DELETE** : Supprime un étudiant.
 
-## Utilisation
+  
+### `/teachers`
 
-1. Clonez ce dépôt sur votre ordinateur :
+- **GET** : Récupère les informations des enseignants et des cours.
+  
+- **POST** : Ajoute un nouvel enseignant avec des cours.
 
-2. Ouvrez la spécification d'API (`API_Onboarding.yml`) avec un éditeur de texte ou Swagger Editor pour explorer les détails.
+## Tags
 
-3. Vous pouvez également utiliser Swagger Viewer pour visualiser et tester l'API en utilisant la spécification.
+- Les endpoints sont marqués avec les tags `Students` et `Teachers` pour une meilleure organisation.
+
+
+Pour ouvrir la spécification d'API (`API_Onboarding.yml`) dans Swagger UI pour explorer les détails, voici le lien pour accéder au fichier source:
+  (https://raw.githubusercontent.com/RobinaryTsinjo/API-Onboarding-Specification/main/API%20Onboarding.yml)
+
+   
 
 
