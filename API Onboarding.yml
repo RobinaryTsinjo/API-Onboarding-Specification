@@ -13,8 +13,10 @@ paths:
           description: Succès
           content:
             application/json:
-              schema: 
-                $ref:'#/components/schemas/Student'
+              example:
+                student_id: 123
+                name: John Doe
+                age: 20
         '500':
           description: Erreur interne du serveur
           content:
@@ -27,7 +29,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref:'#/components/schemas/Student'
+              type: object
+              properties:
+                name:
+                  type: string
+                age:
+                  type: integer
       responses:
         '200':
           description: Succès
@@ -40,15 +47,3 @@ paths:
           content:
             text/plain:
               example: Une erreur est survenue
-components:
-  schemas:
-    Student:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-        name:
-          type: string
-          example: Tsinjo
