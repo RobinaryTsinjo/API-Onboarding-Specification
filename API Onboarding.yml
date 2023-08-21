@@ -1,41 +1,27 @@
-openapi: 3.0.0
+openapi: 3.0.2
 info:
-  title: API d'Onboarding pour les étudiants et enseignants
-  description: STD22069
-  version: 1.3.0
+  title: API Onboarding
+  version: '1.0'
 servers:
-  - url: http://std22069.com
+  - url: https://STD22091.com
 paths:
   /students:
     get:
-      summary: Récupérer la liste des étudiants
+      summary: Récupérer les informations des étudiants
       tags:
         - Students
       responses:
         '200':
-          description: Succès - Liste des étudiants récupérée
+          description: Succès
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    name:
-                      type: string
-                    birthdate:
-                      type: string
-                      format: date
-                  example:
-                    - id: 1
-                      name: Sanda
-                      birthdate: '2003-07-15'
-                    
+                $ref: '#/components/schemas/StudentInfo'
         '500':
           description: Erreur interne du serveur
-
+          content:
+            text/plain:
+              example: Une erreur est survenue
     post:
       summary: Ajouter un nouvel étudiant
       tags:
@@ -45,29 +31,19 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                birthdate:
-                  type: string
-                  format: date
-              required:
-                - name
-                - birthdate
-            example:
-              name: NouveauNom
-              birthdate: '2000-01-01'
+              $ref: '#/components/schemas/NewStudent'
       responses:
         '200':
-          description: Succès - Étudiant ajouté avec succès
+          description: Succès
           content:
             application/json:
-              example:
-                message: Étudiant ajouté avec succès
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
         '500':
           description: Erreur interne du serveur
-
+          content:
+            text/plain:
+              example: Une erreur est survenue
     put:
       summary: Mettre à jour les informations d'un étudiant
       tags:
@@ -77,39 +53,44 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Student'
+              $ref: '#/components/schemas/StudentInfo'
       responses:
         '200':
-          description: Succès - Informations de l'étudiant mises à jour
+          description: Succès
           content:
             application/json:
-              example:
-                message: Informations de l'étudiant mises à jour
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
         '500':
           description: Erreur interne du serveur
-
+          content:
+            text/plain:
+              example: Une erreur est survenue
     delete:
       summary: Supprimer un étudiant
       tags:
         - Students
       responses:
         '200':
-          description: Succès - Étudiant supprimé avec succès
+          description: Succès
           content:
             application/json:
-              example:
-                message: Étudiant supprimé avec succès
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
         '500':
           description: Erreur interne du serveur
+          content:
+            text/plain:
+              example: Une erreur est survenue
 
   /teachers:
     get:
-      summary: Récupérer la liste des enseignants et des cours
+      summary: Récupérer les informations des enseignants et des cours
       tags:
         - Teachers
       responses:
         '200':
-          description: Succès - Liste des enseignants et des cours récupérée
+          description: Succès
           content:
             application/json:
               example:
@@ -120,7 +101,9 @@ paths:
                       course_duration: 12 semaines
         '500':
           description: Erreur interne du serveur
-
+          content:
+            text/plain:
+              example: Une erreur est survenue
     post:
       summary: Ajouter un nouvel enseignant avec des cours
       tags:
@@ -130,35 +113,53 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Teacher'
+              $ref: '#/components/schemas/NewTeacher'
       responses:
         '200':
-          description: Succès - Enseignant ajouté avec succès
+          description: Succès
           content:
             application/json:
-              example:
-                message: Enseignant ajouté avec succès
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
         '500':
           description: Erreur interne du serveur
+          content:
+            text/plain:
+              example: Une erreur est survenue
 
 components:
   schemas:
-    Student:
+    StudentInfo:
       type: object
       properties:
-        id:
+        student_id:
           type: integer
         name:
           type: string
-        birthdate:
-          type: string
-          format: date
+        age:
+          type: integer
       example:
-        id: 1
-        name: Sanda
-        birthdate: '2003-07-15'
+        student_id: 123
+        name: Tsinjo Mickaella
+        age: 19
 
-    Teacher:
+    NewStudent:
+      type: object
+      properties:
+        name:
+          type: string
+        age:
+          type: integer
+
+    SuccessMessage:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Opération réussie
+
+    NewTeacher:
       type: object
       properties:
         teacher_name:
